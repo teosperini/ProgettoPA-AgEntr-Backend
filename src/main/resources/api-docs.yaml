@@ -1,0 +1,21 @@
+openapi: 3.0.3
+info:
+  title: User Management API
+  description: API per la gestione degli utenti IT Consultant
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8080
+    description: Server locale di sviluppo
+
+paths:
+  /api/users:
+
+
+
+
+#Crea utente
+#Lista utenti
+#Cerca utenti da nome
+#Cerca utente tramite username
+#Elimina utente
