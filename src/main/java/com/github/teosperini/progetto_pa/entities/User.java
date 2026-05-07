@@ -1,26 +1,24 @@
-package com.github.teosperini.prova_spring.entities;
+package com.github.teosperini.progetto_pa.entities;
 
-import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
 // Classe POJO di prova (Plain Old Java Object)
-@Entity
-@Table(name = "users")
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotBlank
-    @Column(unique = true, nullable = false)
-    private String username;
+    private String codiceFiscale;
 
     @NotBlank
     private String password;
 
+    @NotBlank
     private String nome;
+
+    @NotBlank
+    private String cognome;
 
     private String ruolo;
 
@@ -30,9 +28,9 @@ public class User {
     public User(){
     }
 
-    public User(String nome, String ruolo, int anniEsperienza, String username, String password) {
+    public User(String nome, String ruolo, int anniEsperienza, String codiceFiscale, String password) {
         this.password = password;
-        this.username = username;
+        this.codiceFiscale = codiceFiscale;
         this.anniEsperienza = anniEsperienza;
         this.nome = nome;
         this.ruolo = ruolo;
@@ -43,11 +41,17 @@ public class User {
     public String getRuolo(){return this.ruolo;}
     public void setRuolo(String ruolo){this.ruolo = ruolo;}
     public int getAnniEsperienza(){return this.anniEsperienza;}
-    public String getUsername(){ return this.username;}
-    public void setUsername(String username){this.username = username;}
+    public String getCodiceFiscale(){ return this.codiceFiscale;}
+    public void setCodiceFiscale(String codiceFiscale){this.codiceFiscale = codiceFiscale;}
     public void setPassword(String password){this.password = password;}
     public String getPassword(){return this.password;}
     public void setAnniEsperienza(int anniEsperienza) {
         this.anniEsperienza = anniEsperienza;
+    }
+    public String getCognome() {
+        return cognome;
+    }
+    public void setCognome(String cognome) {
+        this.cognome = cognome;
     }
 }

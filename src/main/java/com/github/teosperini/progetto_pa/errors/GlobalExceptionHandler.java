@@ -1,8 +1,6 @@
-package com.github.teosperini.prova_spring.errors;
+package com.github.teosperini.progetto_pa.errors;
 
-import com.github.teosperini.prova_spring.errors.exceptions.UserNotAuthorizedException;
-import com.github.teosperini.prova_spring.errors.exceptions.UserNotFoundException;
-import com.github.teosperini.prova_spring.errors.exceptions.UsernameAlreadyInUseException;
+import com.github.teosperini.progetto_pa.errors.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -14,14 +12,9 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(UsernameAlreadyInUseException.class)
-    public ResponseEntity<Map<String, String>> handleConflict(UsernameAlreadyInUseException ex){
+    @ExceptionHandler(CFAlreadyInUseException.class)
+    public ResponseEntity<Map<String, String>> handleConflict(CFAlreadyInUseException ex){
         return createResponse(ex.getMessage(), HttpStatus.CONFLICT);
-    }
-
-    @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<Map<String, String>> handleBadRequest(IllegalArgumentException ex){
-        return createResponse(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(UserNotFoundException.class)
@@ -32,6 +25,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(UserNotAuthorizedException.class)
     public ResponseEntity<Map<String, String>> handleUnauthorized(UserNotAuthorizedException ex) {
         return createResponse(ex.getMessage(), HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(NotValidException.class)
+    public ResponseEntity<Map<String, String>> handleBadRequest(Exception ex) {
+        return createResponse(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
     private ResponseEntity<Map<String, String>> createResponse(String message, HttpStatus status){

@@ -1,8 +1,8 @@
-package com.github.teosperini.prova_spring.controller;
+package com.github.teosperini.progetto_pa.controllers;
 
-import com.github.teosperini.prova_spring.dto.PasswordChangeRequestDTO;
-import com.github.teosperini.prova_spring.dto.UserResponseDTO;
-import com.github.teosperini.prova_spring.service.UserService;
+import com.github.teosperini.progetto_pa.dtos.PasswordChangeRequestDTO;
+import com.github.teosperini.progetto_pa.dtos.UserResponseDTO;
+import com.github.teosperini.progetto_pa.services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,9 +14,9 @@ import java.util.List;
     utilizzata da Spring MVC per gestire le richieste web
  */
 
-@CrossOrigin(origins = {"http://editor.swagger.io", "http://localhost:4200"}) // Specifica chi può chiamarti
+@CrossOrigin(origins = {"http://editor.swagger.io", "http://localhost:4200", "http://localhost:5173"}) // Specifica chi può chiamarti
 @RestController
-@RequestMapping("/api/v1") // Aggiunto versionamento
+@RequestMapping("/api/v1/users") // Aggiunto versionamento
 public class UserController {
 
     private final UserService userService;
@@ -26,23 +26,24 @@ public class UserController {
     }
 
     // Ritorna tutti gli utenti nel sistema
-    @GetMapping("/users")
+    @GetMapping("")
     public ResponseEntity<List<UserResponseDTO>> getUsers(
             @RequestParam(required = false) String username,
             @RequestParam(required = false) String nome,
+            @RequestParam(required = false) String cognome,
             @RequestParam(required = false) String ruolo
     ){
-        return ResponseEntity.ok(userService.searchUsers(username, nome, ruolo));
+        return ResponseEntity.ok(userService.searchUsers(username, nome, cognome, ruolo));
     }
 
-    @PutMapping("/users/{username}")
-    public ResponseEntity<Void> changeUsername(@PathVariable String username, @RequestBody String newUsername){
-        userService.changeUsername(username, newUsername);
+    @PutMapping("/{cf}")
+    public ResponseEntity<Void> changeCodiceFiscale(@PathVariable String username, @RequestBody String newUsername){
+        userService.changeCodiceFiscale(username, newUsername);
         return ResponseEntity.noContent().build();
     }
 
     // Elimina un utente
-    @DeleteMapping("/users/{username}")
+    @DeleteMapping("/{cf}")
     public ResponseEntity<Void> deleteUserByUsername(@PathVariable String username){
         userService.deleteUser(username);
         // Se c'è un errore in deleteUser, il return successivo viene bypassato.
@@ -51,7 +52,7 @@ public class UserController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/users/{username}/password")
+    @PutMapping("/{cf}/password")
     public ResponseEntity<Void> changePassword(@Valid @PathVariable String username, @RequestBody PasswordChangeRequestDTO pwdChangeRequestDTO) {
         userService.changePassword(username, pwdChangeRequestDTO);
         return ResponseEntity.noContent().build();

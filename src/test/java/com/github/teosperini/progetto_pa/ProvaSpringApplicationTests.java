@@ -1,4 +1,4 @@
-package com.github.teosperini.prova_spring;
+package com.github.teosperini.progetto_pa;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -7,54 +7,55 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.2.5</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/>
 	</parent>
 
 	<groupId>com.github.teosperini</groupId>
 	<artifactId>backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
-	<!-- Riempire questi campi aiuta IntelliJ e GitHub a darti un nome leggibile -->
 	<name>Progetto PA - Agenzia delle Entrate - Backend</name>
-	<description>API REST per il progetto di studio spring per la PA</description>
+	<description>API REST con MyBatis e SQLite per il progetto di studio PA</description>
 
 	<properties>
 		<java.version>21</java.version>
 	</properties>
 
 	<dependencies>
-		<!-- Core Web per creare le API REST -->
+		<!-- Core Web per le API REST -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
-		<!-- JPA per il database -->
+		<!-- MyBatis: Sostituisce JPA per un controllo totale sull'SQL -->
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+			<version>3.0.3</version>
 		</dependency>
 
-		<!-- Validazione input (@NotNull, @Size, ecc.) -->
+		<!-- Driver SQLite: Sostituisce H2 per avere un DB su file persistente -->
+		<dependency>
+			<groupId>org.xerial</groupId>
+			<artifactId>sqlite-jdbc</artifactId>
+			<version>3.45.1.0</version>
+		</dependency>
+
+		<!-- Validazione input -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 
-		<!-- OpenAPI/Swagger per documentare e testare le API (localhost:8080/swagger-ui.html) -->
+		<!-- Swagger UI -->
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
 			<version>2.5.0</version>
 		</dependency>
 
-		<!-- Database H2 per lo sviluppo locale (veloce e in-memory) -->
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-
+		<!-- Test Starter -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -70,5 +71,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>

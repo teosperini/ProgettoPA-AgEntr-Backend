@@ -1,10 +1,10 @@
-package com.github.teosperini.prova_spring.dto;
+package com.github.teosperini.progetto_pa.dtos;
 
 public class PasswordChangeRequestDTO extends LoginRequestDTO {
     private String oldPassword;
 
-    public PasswordChangeRequestDTO(String username, String password, String oldPassword) {
-        super(username, password);
+    public PasswordChangeRequestDTO(String codiceFiscale, String password, String oldPassword) {
+        super(codiceFiscale, password);
         this.oldPassword = oldPassword;
     }
 
